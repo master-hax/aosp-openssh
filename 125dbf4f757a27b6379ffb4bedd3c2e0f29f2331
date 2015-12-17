@@ -51,6 +51,24 @@
       "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8a438f4f_6f4a3109",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1074628
+      },
+      "writtenOn": "2015-12-17T23:17:12Z",
+      "side": 1,
+      "message": "And that\u0027s correct -- this is only named GCE because that\u0027s the only place it\u0027s used.\n\nf_flags should only be used for \u003e\u003dKK(19). Now that I\u0027ve looked deeply at this, it likely should be removed entirely -- we can use _STATFS_F_FLAGS as a better way to check for this feature.\n\nI\u0027m not sure there\u0027s a good way to check for sys/capability.h though",
+      "parentUuid": "aa593347_081727d7",
+      "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
