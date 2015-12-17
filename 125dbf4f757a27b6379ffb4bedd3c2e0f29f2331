@@ -33,6 +33,24 @@
       "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4a2517a8_0d75f160",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1062926
+      },
+      "writtenOn": "2015-12-17T23:11:35Z",
+      "side": 1,
+      "message": "To the best of my knowledge the GCE builds are the only ones that rely on external/openssh. The project was actually depopulated and then repopulated with fresh code when GCE development started.\n\nThe two uses of the macro are compile-time fixes, and both would seem to move us from broken compiles to fixed compiles:\n\nopenbsd-compat/bsd-statvfs.c:#if GCE_PLATFORM_SDK_VERSION \u003e\u003d 19\nopenbsd-compat/bsd-statvfs.c-   to-\u003ef_flag \u003d from-\u003ef_flags;\nopenbsd-compat/bsd-statvfs.c-#else\nopenbsd-compat/bsd-statvfs.c-   to-\u003ef_flag \u003d from-\u003ef_spare[0];\nopenbsd-compat/bsd-statvfs.c-#endif\n--\nuidswap.c:#if !defined(GCE_PLATFORM_SDK_VERSION) || (GCE_PLATFORM_SDK_VERSION \u003e 17)\nuidswap.c-#include \u003csys/capability.h\u003e\nuidswap.c-#else\nuidswap.c-#include \u003clinux/capability.h\u003e\nuidswap.c-#endif\n\nWe\u0027ve been quite conservative with the use of this define, so I don\u0027t expect any side-effects from uses buried in headers or libraries.",
+      "parentUuid": "aa593347_081727d7",
+      "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
     }
   ]
 }
