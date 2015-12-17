@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "aa593347_081727d7",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-12-17T22:59:24Z",
+      "side": 1,
+      "message": "This is going to change non-GCE builds of openssh",
+      "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2a3463db_ec886b4c",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002751
+      },
+      "writtenOn": "2015-12-17T22:59:24Z",
+      "side": 1,
+      "message": "this is going to change non-GCE compiles of openssh",
+      "revId": "125dbf4f757a27b6379ffb4bedd3c2e0f29f2331",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
