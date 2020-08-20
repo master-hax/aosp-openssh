@@ -1,7 +1,10 @@
 #!/bin/sh
 #
 # inventory.sh
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 # $Id: inventory.sh,v 1.6 2003/11/21 12:48:56 djm Exp $
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #
 # Originally written by Ben Lindstrom, modified by Darren Tucker to use perl
 # This file is placed into the public domain.

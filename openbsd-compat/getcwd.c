@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /*	from OpenBSD: getcwd.c,v 1.14 2005/08/08 08:05:34 espie Exp */
+=======
+/*	$OpenBSD: getcwd.c,v 1.14 2005/08/08 08:05:34 espie Exp */
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 1989, 1991, 1993
  *	The Regents of the University of California.  All rights reserved.

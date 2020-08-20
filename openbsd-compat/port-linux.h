@@ -1,5 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: port-linux.h,v 1.5 2011/01/25 01:16:18 djm Exp $ */
 
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 2006 Damien Miller <djm@openbsd.org>
  *

@@ -18,8 +18,13 @@
 
 /* OPENBSD ORIGINAL: lib/libc/string/strnlen.c */
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include "config.h"
 #ifndef HAVE_STRNLEN
+=======
+#include "includes.h"
+#if !defined(HAVE_STRNLEN) || defined(BROKEN_STRNLEN)
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #include <sys/types.h>
 
 #include <string.h>

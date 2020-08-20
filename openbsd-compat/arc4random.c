@@ -33,6 +33,7 @@
 #include <string.h>
 #include <unistd.h>
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #ifndef HAVE_ARC4RANDOM
 
 #ifdef WITH_OPENSSL
@@ -112,6 +113,97 @@ _rs_stir(void)
 	if (RAND_bytes(rnd, sizeof(rnd)) <= 0)
 		fatal("Couldn't obtain random bytes (error %ld)",
 		    ERR_get_error());
+=======
+#ifdef HAVE_SYS_RANDOM_H
+# include <sys/random.h>
+#endif
+
+#ifndef HAVE_ARC4RANDOM
+
+#ifdef WITH_OPENSSL
+#include <openssl/rand.h>
+#include <openssl/err.h>
+#endif
+
+#include "log.h"
+
+#define KEYSTREAM_ONLY
+#include "chacha_private.h"
+
+#ifdef __GNUC__
+#define inline __inline
+#else				/* !__GNUC__ */
+#define inline
+#endif				/* !__GNUC__ */
+
+/* OpenSSH isn't multithreaded */
+#define _ARC4_LOCK()
+#define _ARC4_UNLOCK()
+
+#define KEYSZ	32
+#define IVSZ	8
+#define BLOCKSZ	64
+#define RSBUFSZ	(16*BLOCKSZ)
+static int rs_initialized;
+static pid_t rs_stir_pid;
+static chacha_ctx rs;		/* chacha context for random keystream */
+static u_char rs_buf[RSBUFSZ];	/* keystream blocks */
+static size_t rs_have;		/* valid bytes at end of rs_buf */
+static size_t rs_count;		/* bytes till reseed */
+
+static inline void _rs_rekey(u_char *dat, size_t datlen);
+
+static inline void
+_rs_init(u_char *buf, size_t n)
+{
+	if (n < KEYSZ + IVSZ)
+		return;
+	chacha_keysetup(&rs, buf, KEYSZ * 8, 0);
+	chacha_ivsetup(&rs, buf + KEYSZ);
+}
+
+#ifndef WITH_OPENSSL
+# ifndef SSH_RANDOM_DEV
+#  define SSH_RANDOM_DEV "/dev/urandom"
+# endif /* SSH_RANDOM_DEV */
+static void
+getrnd(u_char *s, size_t len)
+{
+	int fd;
+	ssize_t r;
+	size_t o = 0;
+
+#ifdef HAVE_GETRANDOM
+	if ((r = getrandom(s, len, 0)) > 0 && (size_t)r == len)
+		return;
+#endif /* HAVE_GETRANDOM */
+
+	if ((fd = open(SSH_RANDOM_DEV, O_RDONLY)) == -1)
+		fatal("Couldn't open %s: %s", SSH_RANDOM_DEV, strerror(errno));
+	while (o < len) {
+		r = read(fd, s + o, len - o);
+		if (r < 0) {
+			if (errno == EAGAIN || errno == EINTR ||
+			    errno == EWOULDBLOCK)
+				continue;
+			fatal("read %s: %s", SSH_RANDOM_DEV, strerror(errno));
+		}
+		o += r;
+	}
+	close(fd);
+}
+#endif /* WITH_OPENSSL */
+
+static void
+_rs_stir(void)
+{
+	u_char rnd[KEYSZ + IVSZ];
+
+#ifdef WITH_OPENSSL
+	if (RAND_bytes(rnd, sizeof(rnd)) <= 0)
+		fatal("Couldn't obtain random bytes (error 0x%lx)",
+		    (unsigned long)ERR_get_error());
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #else
 	getrnd(rnd, sizeof(rnd));
 #endif

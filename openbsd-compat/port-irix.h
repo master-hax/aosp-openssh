@@ -1,5 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: port-irix.h,v 1.4 2003/08/29 16:59:52 mouring Exp $ */
 
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 2000 Denis Parker.  All rights reserved.
  * Copyright (c) 2000 Michael Stone.  All rights reserved.

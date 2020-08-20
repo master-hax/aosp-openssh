@@ -38,6 +38,7 @@
 
 #include "xmalloc.h"
 #include "packet.h"
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include "buffer.h"
 #include "key.h"
 #include "auth-options.h"
@@ -98,6 +99,71 @@ nischeck(char *namep)
 	if ((fd = fopen (password_file, "r")) == NULL) {
 		/*
 		 * If the passwd file has dissapeared we are in a bad state.
+=======
+#include "auth-options.h"
+#include "log.h"
+#include "misc.h"	/* servconf.h needs misc.h for struct ForwardOptions */
+#include "servconf.h"
+#include "hostfile.h"
+#include "auth.h"
+#include "ssh.h"
+#include "ssh_api.h"
+
+int nischeck(char *);
+
+int
+sys_auth_passwd(struct ssh *ssh, const char *password)
+{
+	Authctxt *authctxt = ssh->authctxt;
+	struct passwd *pw = authctxt->pw;
+	char *salt;
+	int result;
+
+	/* Just use the supplied fake password if authctxt is invalid */
+	char *pw_password = authctxt->valid ? shadow_pw(pw) : pw->pw_passwd;
+
+	if (pw_password == NULL)
+		return 0;
+
+	/* Check for users with no password. */
+	if (strcmp(pw_password, "") == 0 && strcmp(password, "") == 0)
+		return (1);
+
+	/* Encrypt the candidate password using the proper salt. */
+	salt = (pw_password[0] && pw_password[1]) ? pw_password : "xx";
+
+	/*
+	 * Authentication is accepted if the encrypted passwords
+	 * are identical.
+	 */
+#ifdef UNIXWARE_LONG_PASSWORDS
+	if (!nischeck(pw->pw_name)) {
+		result = ((strcmp(bigcrypt(password, salt), pw_password) == 0)
+		||  (strcmp(osr5bigcrypt(password, salt), pw_password) == 0));
+	}
+	else
+#endif /* UNIXWARE_LONG_PASSWORDS */
+		result = (strcmp(xcrypt(password, salt), pw_password) == 0);
+
+#ifdef USE_LIBIAF
+	if (authctxt->valid)
+		free(pw_password);
+#endif
+	return(result);
+}
+
+#ifdef UNIXWARE_LONG_PASSWORDS
+int
+nischeck(char *namep)
+{
+	char password_file[] = "/etc/passwd";
+	FILE *fd;
+	struct passwd *ent = NULL;
+
+	if ((fd = fopen (password_file, "r")) == NULL) {
+		/*
+		 * If the passwd file has disappeared we are in a bad state.
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 		 * However, returning 0 will send us back through the
 		 * authentication scheme that has checked the ia database for
 		 * passwords earlier.

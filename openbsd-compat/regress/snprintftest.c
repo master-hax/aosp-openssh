@@ -47,6 +47,7 @@ int
 main(void)
 {
 	char b[5];
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 	char *src;
 
 	snprintf(b,5,"123456789");
@@ -69,5 +70,30 @@ main(void)
 	if (x_snprintf(b, 1, "%s %d", "hello", 12345) != 11)
 		fail("vsnprintf does not return required length");
 
+=======
+	char *src = NULL;
+
+	snprintf(b,5,"123456789");
+	if (b[4] != '\0')
+		fail("snprintf does not correctly terminate long strings");
+
+	/* check for read overrun on unterminated string */
+	if ((src = malloc(BUFSZ)) == NULL) {
+		fail("malloc failed");
+	} else {
+		memset(src, 'a', BUFSZ);
+		snprintf(b, sizeof(b), "%.*s", 1, src);
+		if (strcmp(b, "a") != 0)
+			fail("failed with length limit '%%.s'");
+	}
+
+	/* check that snprintf and vsnprintf return sane values */
+	if (snprintf(b, 1, "%s %d", "hello", 12345) != 11)
+		fail("snprintf does not return required length");
+	if (x_snprintf(b, 1, "%s %d", "hello", 12345) != 11)
+		fail("vsnprintf does not return required length");
+
+	free(src);
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 	return failed;
 }

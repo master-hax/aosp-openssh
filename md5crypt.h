@@ -7,8 +7,11 @@
  * ----------------------------------------------------------------------------
  */
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: md5crypt.h,v 1.4 2003/05/18 14:46:46 djm Exp $ */
 
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #ifndef _MD5CRYPT_H
 #define _MD5CRYPT_H
 

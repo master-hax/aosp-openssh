@@ -30,6 +30,7 @@
  *    probably requires libm on most operating systems.  Don't yet
  *    support the exponent (e,E) and sigfig (g,G).  Also, fmtint()
  *    was pretty badly broken, it just wasn't being exercised in ways
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
  *    which showed it, so that's been fixed.  Also, formated the code
  *    to mutt conventions, and removed dead code left over from the
  *    original.  Also, there is now a builtin-test, just compile with:
@@ -109,6 +110,75 @@
 #   define VA_COPY(dest, src) (dest) = (src)
 #  endif
 # endif
+=======
+ *    which showed it, so that's been fixed.  Also, formatted the code
+ *    to mutt conventions, and removed dead code left over from the
+ *    original.  Also, there is now a builtin-test, just compile with:
+ *           gcc -DTEST_SNPRINTF -o snprintf snprintf.c -lm
+ *    and run snprintf for results.
+ * 
+ *  Thomas Roessler <roessler@guug.de> 01/27/98 for mutt 0.89i
+ *    The PGP code was using unsigned hexadecimal formats. 
+ *    Unfortunately, unsigned formats simply didn't work.
+ *
+ *  Michael Elkins <me@cs.hmc.edu> 03/05/98 for mutt 0.90.8
+ *    The original code assumed that both snprintf() and vsnprintf() were
+ *    missing.  Some systems only have snprintf() but not vsnprintf(), so
+ *    the code is now broken down under HAVE_SNPRINTF and HAVE_VSNPRINTF.
+ *
+ *  Andrew Tridgell (tridge@samba.org) Oct 1998
+ *    fixed handling of %.0f
+ *    added test for HAVE_LONG_DOUBLE
+ *
+ * tridge@samba.org, idra@samba.org, April 2001
+ *    got rid of fcvt code (twas buggy and made testing harder)
+ *    added C99 semantics
+ *
+ * date: 2002/12/19 19:56:31;  author: herb;  state: Exp;  lines: +2 -0
+ * actually print args for %g and %e
+ * 
+ * date: 2002/06/03 13:37:52;  author: jmcd;  state: Exp;  lines: +8 -0
+ * Since includes.h isn't included here, VA_COPY has to be defined here.  I don't
+ * see any include file that is guaranteed to be here, so I'm defining it
+ * locally.  Fixes AIX and Solaris builds.
+ * 
+ * date: 2002/06/03 03:07:24;  author: tridge;  state: Exp;  lines: +5 -13
+ * put the ifdef for HAVE_VA_COPY in one place rather than in lots of
+ * functions
+ * 
+ * date: 2002/05/17 14:51:22;  author: jmcd;  state: Exp;  lines: +21 -4
+ * Fix usage of va_list passed as an arg.  Use __va_copy before using it
+ * when it exists.
+ * 
+ * date: 2002/04/16 22:38:04;  author: idra;  state: Exp;  lines: +20 -14
+ * Fix incorrect zpadlen handling in fmtfp.
+ * Thanks to Ollie Oldham <ollie.oldham@metro-optix.com> for spotting it.
+ * few mods to make it easier to compile the tests.
+ * added the "Ollie" test to the floating point ones.
+ *
+ * Martin Pool (mbp@samba.org) April 2003
+ *    Remove NO_CONFIG_H so that the test case can be built within a source
+ *    tree with less trouble.
+ *    Remove unnecessary SAFE_FREE() definition.
+ *
+ * Martin Pool (mbp@samba.org) May 2003
+ *    Put in a prototype for dummy_snprintf() to quiet compiler warnings.
+ *
+ *    Move #endif to make sure VA_COPY, LDOUBLE, etc are defined even
+ *    if the C library has some snprintf functions already.
+ *
+ * Damien Miller (djm@mindrot.org) Jan 2007
+ *    Fix integer overflows in return value.
+ *    Make formatting quite a bit faster by inlining dopr_outch()
+ *
+ **************************************************************/
+
+#include "includes.h"
+
+#if defined(BROKEN_SNPRINTF)		/* For those with broken snprintf() */
+# undef HAVE_SNPRINTF
+# undef HAVE_VSNPRINTF
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #endif
 
 #if !defined(HAVE_SNPRINTF) || !defined(HAVE_VSNPRINTF)

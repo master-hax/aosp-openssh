@@ -1,4 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /*	$OpenBSD: rijndael.c,v 1.19 2014/11/18 22:38:48 mikeb Exp $ */
+=======
+/*	$OpenBSD: rijndael.c,v 1.20 2015/03/16 11:09:52 djm Exp $ */
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 /**
  * rijndael-alg-fst.c

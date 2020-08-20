@@ -22,6 +22,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: entropy.h,v 1.6 2011/09/09 01:29:41 dtucker Exp $ */
 
 #ifndef _RANDOMS_H
@@ -33,5 +34,15 @@ void seed_rng(void);
 
 void rexec_send_rng_seed(Buffer *);
 void rexec_recv_rng_seed(Buffer *);
+=======
+#ifndef _RANDOMS_H
+#define _RANDOMS_H
+
+struct sshbuf;
+
+void seed_rng(void);
+void rexec_send_rng_seed(struct sshbuf *);
+void rexec_recv_rng_seed(struct sshbuf *);
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 #endif /* _RANDOMS_H */

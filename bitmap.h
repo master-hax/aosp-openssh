@@ -1,3 +1,7 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
+=======
+/* $OpenBSD: bitmap.h,v 1.2 2017/10/20 01:56:39 djm Exp $ */
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 2015 Damien Miller <djm@mindrot.org>
  *

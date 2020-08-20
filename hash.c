@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $OpenBSD: hash.c,v 1.3 2013/12/09 11:03:45 markus Exp $ */
 
 /* Copied from nacl-20110221/crypto_hash/sha512/ref/hash.c */
@@ -74,3 +75,50 @@ int crypto_hash_sha512(unsigned char *out,const unsigned char *in,unsigned long 
 
   return 0;
 }
+=======
+/* $OpenBSD: hash.c,v 1.4 2017/12/14 21:07:39 naddy Exp $ */
+
+/* $OpenBSD: hash.c,v 1.6 2019/11/29 00:11:21 djm Exp $ */
+/*
+ * Public domain. Author: Christian Weisgerber <naddy@openbsd.org>
+ * API compatible reimplementation of function from nacl
+ */
+
+#include "includes.h"
+
+#include "crypto_api.h"
+
+#include <stdarg.h>
+
+#ifdef WITH_OPENSSL
+#include <openssl/evp.h>
+
+int
+crypto_hash_sha512(unsigned char *out, const unsigned char *in,
+    unsigned long long inlen)
+{
+
+	if (!EVP_Digest(in, inlen, out, NULL, EVP_sha512(), NULL))
+		return -1;
+	return 0;
+}
+
+#else
+# ifdef HAVE_SHA2_H
+#  include <sha2.h>
+# endif
+
+int
+crypto_hash_sha512(unsigned char *out, const unsigned char *in,
+    unsigned long long inlen)
+{
+
+	SHA2_CTX ctx;
+
+	SHA512Init(&ctx);
+	SHA512Update(&ctx, in, inlen);
+	SHA512Final(out, &ctx);
+	return 0;
+}
+#endif /* WITH_OPENSSL */
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)

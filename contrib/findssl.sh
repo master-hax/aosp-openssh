@@ -1,7 +1,10 @@
 #!/bin/sh
 #
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 # $Id: findssl.sh,v 1.4 2007/02/19 11:44:25 dtucker Exp $
 #
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 # findssl.sh
 #	Search for all instances of OpenSSL headers and libraries
 #	and print their versions.

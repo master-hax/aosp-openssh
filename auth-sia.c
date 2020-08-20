@@ -36,6 +36,7 @@
 #include <string.h>
 
 #include "ssh.h"
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include "key.h"
 #include "hostfile.h"
 #include "auth.h"
@@ -55,6 +56,28 @@ sys_auth_passwd(Authctxt *authctxt, const char *pass)
 	int ret;
 	SIAENTITY *ent = NULL;
 	const char *host;
+=======
+#include "ssh_api.h"
+#include "hostfile.h"
+#include "auth.h"
+#include "auth-sia.h"
+#include "log.h"
+#include "servconf.h"
+#include "canohost.h"
+#include "uidswap.h"
+
+extern ServerOptions options;
+extern int saved_argc;
+extern char **saved_argv;
+
+int
+sys_auth_passwd(struct ssh *ssh, const char *pass)
+{
+	int ret;
+	SIAENTITY *ent = NULL;
+	const char *host;
+	Authctxt *authctxt = ssh->authctxt;
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 	host = get_canonical_hostname(options.use_dns);
 

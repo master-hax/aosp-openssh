@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $OpenBSD: sandbox-systrace.c,v 1.14 2015/01/20 23:14:00 deraadt Exp $ */
 /*
  * Copyright (c) 2011 Damien Miller <djm@mindrot.org>
@@ -126,6 +127,144 @@ ssh_sandbox_parent(struct ssh_sandbox *box, pid_t child_pid,
 		pid = waitpid(child_pid, &status, WUNTRACED);
 	} while (pid == -1 && errno == EINTR);
 	signal(SIGCHLD, box->osigchld);
+=======
+/* $OpenBSD: sandbox-systrace.c,v 1.18 2015/10/02 01:39:26 deraadt Exp $ */
+/*
+ * Copyright (c) 2011 Damien Miller <djm@mindrot.org>
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+ * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+ * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+ * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ */
+
+#include "includes.h"
+
+#ifdef SANDBOX_SYSTRACE
+
+#include <sys/types.h>
+#include <sys/ioctl.h>
+#include <sys/syscall.h>
+#include <sys/socket.h>
+#include <sys/wait.h>
+
+#include <dev/systrace.h>
+
+#include <errno.h>
+#include <fcntl.h>
+#include <limits.h>
+#include <signal.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+
+#include "atomicio.h"
+#include "log.h"
+#include "ssh-sandbox.h"
+#include "xmalloc.h"
+
+struct sandbox_policy {
+	int syscall;
+	int action;
+};
+
+/* Permitted syscalls in preauth. Unlisted syscalls get SYSTR_POLICY_KILL */
+static const struct sandbox_policy preauth_policy[] = {
+	{ SYS_exit, SYSTR_POLICY_PERMIT },
+#ifdef SYS_kbind
+	{ SYS_kbind, SYSTR_POLICY_PERMIT },
+#endif
+
+	{ SYS_getpid, SYSTR_POLICY_PERMIT },
+	{ SYS_getpgid, SYSTR_POLICY_PERMIT },
+	{ SYS_clock_gettime, SYSTR_POLICY_PERMIT },
+	{ SYS_gettimeofday, SYSTR_POLICY_PERMIT },
+	{ SYS_nanosleep, SYSTR_POLICY_PERMIT },
+	{ SYS_sigprocmask, SYSTR_POLICY_PERMIT },
+
+#ifdef SYS_getentropy
+	/* OpenBSD 5.6 and newer use getentropy(2) to seed arc4random(3). */
+	{ SYS_getentropy, SYSTR_POLICY_PERMIT },
+#else
+	/* Previous releases used sysctl(3)'s kern.arnd variable. */
+	{ SYS___sysctl, SYSTR_POLICY_PERMIT },
+#endif
+#ifdef SYS_sendsyslog
+	{ SYS_sendsyslog, SYSTR_POLICY_PERMIT },
+#endif
+
+	{ SYS_madvise, SYSTR_POLICY_PERMIT },
+	{ SYS_mmap, SYSTR_POLICY_PERMIT },
+	{ SYS_mprotect, SYSTR_POLICY_PERMIT },
+	{ SYS_mquery, SYSTR_POLICY_PERMIT },
+	{ SYS_munmap, SYSTR_POLICY_PERMIT },
+
+	{ SYS_poll, SYSTR_POLICY_PERMIT },
+	{ SYS_select, SYSTR_POLICY_PERMIT },
+	{ SYS_read, SYSTR_POLICY_PERMIT },
+	{ SYS_write, SYSTR_POLICY_PERMIT },
+	{ SYS_shutdown, SYSTR_POLICY_PERMIT },
+	{ SYS_close, SYSTR_POLICY_PERMIT },
+
+	{ SYS_open, SYSTR_POLICY_NEVER },
+
+	{ -1, -1 }
+};
+
+struct ssh_sandbox {
+	int systrace_fd;
+	pid_t child_pid;
+	void (*osigchld)(int);
+};
+
+struct ssh_sandbox *
+ssh_sandbox_init(struct monitor *monitor)
+{
+	struct ssh_sandbox *box;
+
+	debug3("%s: preparing systrace sandbox", __func__);
+	box = xcalloc(1, sizeof(*box));
+	box->systrace_fd = -1;
+	box->child_pid = 0;
+	box->osigchld = ssh_signal(SIGCHLD, SIG_IGN);
+
+	return box;
+}
+
+void
+ssh_sandbox_child(struct ssh_sandbox *box)
+{
+	debug3("%s: ready", __func__);
+	ssh_signal(SIGCHLD, box->osigchld);
+	if (kill(getpid(), SIGSTOP) != 0)
+		fatal("%s: kill(%d, SIGSTOP)", __func__, getpid());
+	debug3("%s: started", __func__);
+}
+
+static void
+ssh_sandbox_parent(struct ssh_sandbox *box, pid_t child_pid,
+    const struct sandbox_policy *allowed_syscalls)
+{
+	int dev_systrace, i, j, found, status;
+	pid_t pid;
+	struct systrace_policy policy;
+
+	/* Wait for the child to send itself a SIGSTOP */
+	debug3("%s: wait for child %ld", __func__, (long)child_pid);
+	do {
+		pid = waitpid(child_pid, &status, WUNTRACED);
+	} while (pid == -1 && errno == EINTR);
+	ssh_signal(SIGCHLD, box->osigchld);
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 	if (!WIFSTOPPED(status)) {
 		if (WIFSIGNALED(status))
 			fatal("%s: child terminated with signal %d",

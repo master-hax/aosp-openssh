@@ -127,7 +127,11 @@ readonly -f check_user_homedir
 check_user_dot_ssh_dir() {
   if [ -e "${pwdhome}/.ssh" -a ! -d "${pwdhome}/.ssh" ]
   then
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
     csih_error "${pwdhome}/.ssh is existant but not a directory. Cannot create user identity files."
+=======
+    csih_error "${pwdhome}/.ssh is existent but not a directory. Cannot create user identity files."
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
   fi
   
   if [ ! -e "${pwdhome}/.ssh" ]

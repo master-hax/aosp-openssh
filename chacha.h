@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $OpenBSD: chacha.h,v 1.3 2014/05/02 03:27:54 djm Exp $ */
 
 /*
@@ -10,6 +11,21 @@ Public domain.
 #define CHACHA_H
 
 #include <sys/types.h>
+=======
+/* $OpenBSD: chacha.h,v 1.4 2016/08/27 04:04:56 guenther Exp $ */
+
+/*
+chacha-merged.c version 20080118
+D. J. Bernstein
+Public domain.
+*/
+
+#ifndef CHACHA_H
+#define CHACHA_H
+
+#include <sys/types.h>
+#include <stdlib.h>
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 struct chacha_ctx {
 	u_int input[16];

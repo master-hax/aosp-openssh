@@ -64,6 +64,10 @@ bindresvport_sa(int sd, struct sockaddr *sa)
 	if (sa == NULL) {
 		memset(&myaddr, 0, sizeof(myaddr));
 		sa = (struct sockaddr *)&myaddr;
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
+=======
+		salen = sizeof(myaddr);
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 		if (getsockname(sd, sa, &salen) == -1)
 			return -1;	/* errno is correctly set */

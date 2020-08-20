@@ -42,11 +42,19 @@ typedef unsigned int	nfds_t;
 #define	POLLIN		0x0001
 #define	POLLOUT		0x0004
 #define	POLLERR		0x0008
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #if 0
 /* the following are currently not implemented */
 #define	POLLPRI		0x0002
 #define	POLLHUP		0x0010
 #define	POLLNVAL	0x0020
+=======
+#define	POLLHUP		0x0010
+#define	POLLNVAL	0x0020
+#if 0
+/* the following are currently not implemented */
+#define	POLLPRI		0x0002
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #define	POLLRDNORM	0x0040
 #define POLLNORM	POLLRDNORM
 #define POLLWRNORM      POLLOUT

@@ -1,5 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: bsd-setres_id.h,v 1.1 2012/11/05 06:04:37 dtucker Exp $ */
 
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 2012 Darren Tucker (dtucker at zip com au).
  *

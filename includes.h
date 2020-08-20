@@ -32,6 +32,7 @@
 #ifdef HAVE_BSTRING_H
 # include <bstring.h>
 #endif
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #if defined(HAVE_GLOB_H) && defined(GLOB_HAS_ALTDIRFUNC) && \
     defined(GLOB_HAS_GL_MATCHC) && defined(GLOB_HAS_GL_STATV) && \
     defined(HAVE_DECL_GLOB_NOMATCH) &&  HAVE_DECL_GLOB_NOMATCH != 0 && \
@@ -98,6 +99,71 @@
 #endif
 #ifdef HAVE_SYS_SYSMACROS_H
 # include <sys/sysmacros.h> /* For MIN, MAX, etc */
+=======
+#ifdef HAVE_ENDIAN_H
+# include <endian.h>
+#endif
+#ifdef HAVE_TTYENT_H
+# include <ttyent.h>
+#endif
+#ifdef HAVE_UTIME_H
+# include <utime.h>
+#endif
+#ifdef HAVE_MAILLOCK_H
+# include <maillock.h> /* For _PATH_MAILDIR */
+#endif
+#ifdef HAVE_NEXT
+# include <libc.h>
+#endif
+#ifdef HAVE_PATHS_H
+# include <paths.h>
+#endif
+
+/*
+ *-*-nto-qnx needs these headers for strcasecmp and LASTLOG_FILE respectively
+ */
+#ifdef HAVE_STRINGS_H
+# include <strings.h>
+#endif
+#ifdef HAVE_LOGIN_H
+# include <login.h>
+#endif
+
+#ifdef HAVE_UTMP_H
+#  include <utmp.h>
+#endif
+#ifdef HAVE_UTMPX_H
+#  include <utmpx.h>
+#endif
+#ifdef HAVE_LASTLOG_H
+#  include <lastlog.h>
+#endif
+
+#ifdef HAVE_SYS_SELECT_H
+# include <sys/select.h>
+#endif
+#ifdef HAVE_SYS_BSDTTY_H
+# include <sys/bsdtty.h>
+#endif
+#ifdef HAVE_STDINT_H
+# include <stdint.h>
+#endif
+#include <termios.h>
+#ifdef HAVE_SYS_BITYPES_H
+# include <sys/bitypes.h> /* For u_intXX_t */
+#endif
+#ifdef HAVE_SYS_CDEFS_H
+# include <sys/cdefs.h> /* For __P() */
+#endif
+#ifdef HAVE_SYS_STAT_H
+# include <sys/stat.h> /* For S_* constants and macros */
+#endif
+#ifdef HAVE_SYS_SYSMACROS_H
+# include <sys/sysmacros.h> /* For MIN, MAX, etc */
+#endif
+#ifdef HAVE_SYS_TIME_H
+# include <sys/time.h> /* for timespeccmp if present */
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #endif
 #ifdef HAVE_SYS_MMAN_H
 #include <sys/mman.h> /* for MAP_ANONYMOUS */

@@ -17,6 +17,7 @@ PIDFILE=$piddir/sshd.pid
 PidFile=`grep "^PidFile" ${sysconfdir}/sshd_config | tr "=" " " | awk '{print $2}'`
 [ X$PidFile = X ]  ||  PIDFILE=$PidFile
 SSH_KEYGEN=$prefix/bin/ssh-keygen
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 HOST_KEY_RSA1=$sysconfdir/ssh_host_key
 HOST_KEY_DSA=$sysconfdir/ssh_host_dsa_key
 HOST_KEY_RSA=$sysconfdir/ssh_host_rsa_key
@@ -28,6 +29,15 @@ checkkeys() {
     if [ ! -f $HOST_KEY_RSA1 ]; then
 	${SSH_KEYGEN} -t rsa1 -f ${HOST_KEY_RSA1} -N ""
     fi
+=======
+HOST_KEY_DSA=$sysconfdir/ssh_host_dsa_key
+HOST_KEY_RSA=$sysconfdir/ssh_host_rsa_key
+@COMMENT_OUT_ECC@HOST_KEY_ECDSA=$sysconfdir/ssh_host_ecdsa_key
+HOST_KEY_ED25519=$sysconfdir/ssh_host_ed25519_key
+
+
+checkkeys() {
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
     if [ ! -f $HOST_KEY_DSA ]; then
 	${SSH_KEYGEN} -t dsa -f ${HOST_KEY_DSA} -N ""
     fi

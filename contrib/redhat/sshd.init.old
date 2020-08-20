@@ -24,6 +24,7 @@ prog="sshd"
 # Some functions to make the below more readable
 KEYGEN=/usr/bin/ssh-keygen
 SSHD=/usr/sbin/sshd
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 RSA1_KEY=/etc/ssh/ssh_host_key
 RSA_KEY=/etc/ssh/ssh_host_rsa_key
 DSA_KEY=/etc/ssh/ssh_host_dsa_key
@@ -120,6 +121,87 @@ case "$1" in
 	start)
 		# Create keys if necessary
 		do_rsa1_keygen;
+=======
+RSA_KEY=/etc/ssh/ssh_host_rsa_key
+DSA_KEY=/etc/ssh/ssh_host_dsa_key
+PID_FILE=/var/run/sshd.pid
+
+my_success() {
+  local msg
+  if [ $# -gt 1 ]; then
+    msg="$2"
+  else
+    msg="done"
+  fi
+  case "`type -type success`" in
+    function)
+      success "$1"
+    ;;
+    *)
+      echo -n "${msg}"
+    ;;
+  esac
+}
+my_failure() {
+  local msg
+  if [ $# -gt 1 ]; then
+    msg="$2"
+  else
+    msg="FAILED"
+  fi
+  case "`type -type failure`" in
+    function)
+      failure "$1"
+    ;;
+    *)
+      echo -n "${msg}"
+    ;;
+  esac
+}
+do_rsa_keygen() {
+	if [ ! -s $RSA_KEY ]; then
+		echo -n "Generating SSH2 RSA host key: "
+		if $KEYGEN -q -t rsa -f $RSA_KEY -C '' -N '' >&/dev/null; then
+			chmod 600 $RSA_KEY
+			chmod 644 $RSA_KEY.pub
+			my_success "RSA key generation"
+			echo
+		else
+			my_failure "RSA key generation"
+			echo
+			exit 1
+		fi
+	fi
+}
+do_dsa_keygen() {
+	if [ ! -s $DSA_KEY ]; then
+		echo -n "Generating SSH2 DSA host key: "
+		if $KEYGEN -q -t dsa -f $DSA_KEY -C '' -N '' >&/dev/null; then
+			chmod 600 $DSA_KEY
+			chmod 644 $DSA_KEY.pub
+			my_success "DSA key generation"
+			echo
+		else
+			my_failure "DSA key generation"
+			echo
+			exit 1
+		fi
+	fi
+}
+do_restart_sanity_check() {
+	$SSHD -t
+	RETVAL=$?
+	if [ ! "$RETVAL" = 0 ]; then
+		my_failure "Configuration file or keys"
+		echo
+	fi
+}
+
+
+case "$1" in
+	start)
+		# Create keys if necessary
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 		do_rsa_keygen;
 		do_dsa_keygen;
 		

@@ -29,7 +29,11 @@
 #include <sys/wait.h>
 #include "bsd-nextstep.h"
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 pid_t 
+=======
+pid_t
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 posix_wait(int *status)
 {
 	union wait statusp;

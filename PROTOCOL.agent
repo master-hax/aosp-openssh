@@ -1,3 +1,4 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 This describes the protocol used by OpenSSH's ssh-agent.
 
 OpenSSH's agent supports managing keys for the standard SSH protocol
@@ -558,3 +559,10 @@ Locking and unlocking affects both protocol 1 and protocol 2 keys.
 	SSH_AGENT_CONSTRAIN_CONFIRM			2
 
 $OpenBSD: PROTOCOL.agent,v 1.7 2013/01/02 00:33:49 djm Exp $
+=======
+This file used to contain a description of the SSH agent protocol
+implemented by OpenSSH. It has since been superseded by an Internet-
+draft that is available from:
+
+https://tools.ietf.org/html/draft-miller-ssh-agent-02
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)

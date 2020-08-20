@@ -11,7 +11,11 @@ which allows the use of outbound SSH from behind a SOCKS4, SOCKS5 or
 https CONNECT style proxy server. His page for connect.c has extensive
 documentation on its use as well as compiled versions for Win32.
 
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 http://www.taiyo.co.jp/~gotoh/ssh/connect.html
+=======
+https://bitbucket.org/gotoh/connect/wiki/Home
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 
 X11 SSH Askpass:

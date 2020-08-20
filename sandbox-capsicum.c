@@ -22,7 +22,11 @@
 #include <sys/param.h>
 #include <sys/time.h>
 #include <sys/resource.h>
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include <sys/capability.h>
+=======
+#include <sys/capsicum.h>
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 #include <errno.h>
 #include <stdarg.h>

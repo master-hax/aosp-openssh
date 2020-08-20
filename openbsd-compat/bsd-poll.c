@@ -1,5 +1,8 @@
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 /* $Id: bsd-poll.c,v 1.6 2014/02/05 23:44:13 dtucker Exp $ */
 
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 /*
  * Copyright (c) 2004, 2005, 2007 Darren Tucker (dtucker at zip com au).
  *

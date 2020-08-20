@@ -5,7 +5,11 @@ SVR4 style package tools.
 
 The build process is called a 'dummy install'.. Which means the software does
 a  "make install-nokeys DESTDIR=[fakeroot]".  This way all manpages should
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 be handled correctly and key are defered until the first time the sshd
+=======
+be handled correctly and key are deferred until the first time the sshd
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 is started.
 
 Directions:

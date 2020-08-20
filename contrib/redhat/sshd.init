@@ -40,7 +40,10 @@ start()
 	# Create keys if necessary
 	/usr/bin/ssh-keygen -A
 	if [ -x /sbin/restorecon ]; then
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 		/sbin/restorecon /etc/ssh/ssh_host_key.pub
+=======
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 		/sbin/restorecon /etc/ssh/ssh_host_rsa_key.pub
 		/sbin/restorecon /etc/ssh/ssh_host_dsa_key.pub
 		/sbin/restorecon /etc/ssh/ssh_host_ecdsa_key.pub

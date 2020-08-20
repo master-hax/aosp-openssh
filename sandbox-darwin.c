@@ -30,7 +30,12 @@
 #include <unistd.h>
 
 #include "log.h"
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include "sandbox.h"
+=======
+#include "ssh-sandbox.h"
+#include "monitor.h"
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 #include "xmalloc.h"
 
 /* Darwin/OS X sandbox */

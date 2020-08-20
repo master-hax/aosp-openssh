@@ -50,7 +50,13 @@
 #endif
 
 #include <sys/types.h>
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 #include <blf.h>
+=======
+#ifdef HAVE_BLF_H
+#include <blf.h>
+#endif
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 
 #undef inline
 #ifdef __GNUC__

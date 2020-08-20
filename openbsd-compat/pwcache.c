@@ -67,6 +67,7 @@ user_from_uid(uid_t uid, int nouser)
 		if ((pw = getpwuid(uid)) == NULL) {
 			if (nouser)
 				return (NULL);
+<<<<<<< HEAD   (22246b Merge "Pass control to adelva@")
 			(void)snprintf(nbuf, sizeof(nbuf), "%u", uid);
 		}
 		cp->uid = uid;
@@ -103,6 +104,44 @@ group_from_gid(gid_t gid, int nogroup)
 			if (nogroup)
 				return (NULL);
 			(void)snprintf(nbuf, sizeof(nbuf), "%u", gid);
+=======
+			(void)snprintf(nbuf, sizeof(nbuf), "%lu", (u_long)uid);
+		}
+		cp->uid = uid;
+		if (cp->name != NULL)
+			free(cp->name);
+		cp->name = strdup(pw ? pw->pw_name : nbuf);
+	}
+	return (cp->name);
+}
+#endif
+
+#ifndef HAVE_GROUP_FROM_GID
+char *
+group_from_gid(gid_t gid, int nogroup)
+{
+	static struct ncache {
+		gid_t	gid;
+		char	*name;
+	} c_gid[NCACHE];
+	static int gropen;
+	static char nbuf[15];		/* 32 bits == 10 digits */
+	struct group *gr;
+	struct ncache *cp;
+
+	cp = c_gid + (gid & MASK);
+	if (cp->gid != gid || cp->name == NULL) {
+		if (gropen == 0) {
+#ifdef HAVE_SETGROUPENT
+			setgroupent(1);
+#endif
+			gropen = 1;
+		}
+		if ((gr = getgrgid(gid)) == NULL) {
+			if (nogroup)
+				return (NULL);
+			(void)snprintf(nbuf, sizeof(nbuf), "%lu", (u_long)gid);
+>>>>>>> BRANCH (ecb2c0 upstream: fix compilation with DEBUG_KEXDH; bz#3160 ok dtuck)
 		}
 		cp->gid = gid;
 		if (cp->name != NULL)
