@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc6a0719_4f40f774",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1031048
+      },
+      "writtenOn": "2020-10-06T15:58:54Z",
+      "side": 1,
+      "message": "(FWIW, even if the signature had matched, we\u0027d want to flip this anyway to avoid a duplicate symbol.)",
+      "range": {
+        "startLine": 9,
+        "startChar": 43,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "9a0c33ea16835032b6fc23dca79febb406613bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
+      "unresolved": false
+    }
+  ]
+}
