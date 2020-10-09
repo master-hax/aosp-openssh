@@ -1,6 +1,7 @@
 {
   "comments": [
     {
+      "unresolved": false,
       "key": {
         "uuid": "bc6a0719_4f40f774",
         "filename": "/COMMIT_MSG",
@@ -20,8 +21,24 @@
         "endChar": 62
       },
       "revId": "9a0c33ea16835032b6fc23dca79febb406613bab",
-      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889",
-      "unresolved": false
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fa262c_cd304f9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1334152
+      },
+      "writtenOn": "2020-10-09T08:48:59Z",
+      "side": 1,
+      "message": "Adding Bypass-Presubmit.  Only failing test is in ub-launcher3-master which has already been failing for weeks and wasn\u0027t being triggered for this topic until I added the clean-step.\n\n",
+      "revId": "9a0c33ea16835032b6fc23dca79febb406613bab",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
