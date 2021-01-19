@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cd3f0c_01555c9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1101629
+      },
+      "writtenOn": "2021-01-19T04:26:59Z",
+      "side": 1,
+      "message": "This patch can now be merged.\nSince the change is obvious (the define name is _PATH_SSH_PROGRAM), no testing is needed in my opinion",
+      "revId": "ad1b3df0824c2dd01ac7098118161cf364ecb52e",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
