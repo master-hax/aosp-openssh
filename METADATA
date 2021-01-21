@@ -13,5 +13,6 @@ third_party {
   }
   version: "8.3p1"
   last_upgrade_date { year: 2020 month: 8 day: 20 }
-  license_type: NOTICE
+  # would be NOTICE save for: md5crypt.c and md5crypt.h
+  license_type: BY_EXCEPTION_ONLY
 }
