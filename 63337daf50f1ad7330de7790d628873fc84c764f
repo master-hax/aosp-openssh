@@ -16,6 +16,23 @@
       "message": "PTAL\n\nAdded comment\n",
       "revId": "63337daf50f1ad7330de7790d628873fc84c764f",
       "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8553e805_c56f98d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1359095
+      },
+      "writtenOn": "2021-01-23T23:14:10Z",
+      "side": 1,
+      "message": "Voting -1 on Open-Source-Licensing until Dash approves.",
+      "revId": "63337daf50f1ad7330de7790d628873fc84c764f",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
     }
   ]
 }
