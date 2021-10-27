@@ -1,4 +1,4 @@
-/* $OpenBSD: auth2-none.c,v 1.22 2018/07/09 21:35:50 markus Exp $ */
+/* $OpenBSD: auth2-none.c,v 1.23 2020/10/18 11:32:01 djm Exp $ */
 /*
  * Copyright (c) 2000 Markus Friedl.  All rights reserved.
  *
@@ -65,10 +65,14 @@ userauth_none(struct ssh *ssh)
 
 	none_enabled = 0;
 	if ((r = sshpkt_get_end(ssh)) != 0)
+<<<<<<< HEAD   (393ead Merge "_PATH_SSH_PROGRAM should point to ssh not sftp" am: 6)
 		fatal("%s: %s", __func__, ssh_err(r));
 
 	/* no password authentication in Android. */
 #if !defined(ANDROID)
+=======
+		fatal_fr(r, "parse packet");
+>>>>>>> BRANCH (bf944e initgroups needs grp.h)
 	if (options.permit_empty_passwd && options.password_authentication)
 		return (PRIVSEP(auth_password(ssh, "")));
 #endif
