@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b24ac952_38985750",
+        "filename": "Android.bp",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2022-12-20T23:36:16Z",
+      "side": 0,
+      "message": "This file was removed by https://github.com/openssh/openssh-portable/commit/800c2483e68db38bd1566ff69677124be974aceb.",
+      "range": {
+        "startLine": 85,
+        "startChar": 9,
+        "endLine": 85,
+        "endChar": 21
+      },
+      "revId": "0dd202c0c4835313635dbfd54a59f7edd9de3fbb",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
