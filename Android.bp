@@ -38,9 +38,7 @@ license {
     visibility: [":__subpackages__"],
     license_kinds: [
         "SPDX-license-identifier-BSD",
-        "SPDX-license-identifier-Beerware",
         "SPDX-license-identifier-MIT",
-        "SPDX-license-identifier-OpenSSL",
         "legacy_notice",
         "legacy_unencumbered",
     ],
