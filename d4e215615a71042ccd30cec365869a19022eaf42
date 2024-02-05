@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d29580_bbe39a10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1669779
+      },
+      "writtenOn": "2024-02-05T19:14:45Z",
+      "side": 1,
+      "message": "Context: b/304366350. Please let me know whether this change makes sense. Thanks!",
+      "revId": "d4e215615a71042ccd30cec365869a19022eaf42",
+      "serverId": "85c56323-6fa9-3386-8a01-6480fb634889"
+    }
+  ]
+}
